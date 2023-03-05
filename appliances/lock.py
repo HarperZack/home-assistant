@@ -16,9 +16,11 @@ class Lock:
 
     def unlock(self):
         self.api.unlock(self.token, self.id)
+        return f'{self.name} unlocked.'
 
     def lock(self):
         self.api.lock(self.token, self.id)
+        return f'{self.name} locked.'
 
 
 def get_locks_and_ids():
