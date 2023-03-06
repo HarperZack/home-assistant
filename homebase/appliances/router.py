@@ -1,5 +1,5 @@
 import nmap
-import misc
+from homebase import misc
 
 
 def whos_online():
