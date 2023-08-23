@@ -5,6 +5,7 @@ from pprint import pprint as pp
 
 class Plug:
     # Key is difficult to find. Follow this video; link devices as needed: https://www.youtube.com/watch?v=Q1ZShFJDvE0
+    # Follow any google guide to get ip and id; those all still work and are quick
     def __init__(self, id, ip, key, version='3.3'):
         self.id = id
         self.ip = ip

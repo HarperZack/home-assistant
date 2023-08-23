@@ -2,8 +2,10 @@ from yalexs.api import Api
 from yalexs.authenticator import Authenticator
 from homebase import misc
 
+#If not authenticated, check comments at the bottom. It works.
 api = Api(timeout=20)
 authenticator = Authenticator(api, "email", misc.email, misc.august_password)
+authentication = authenticator.authenticate()
 all_locks = api.get_locks(misc.august_token)
 
 
@@ -36,6 +38,8 @@ def get_first_lock():
         return Lock(lock, locks[lock], api)
 
 
+def get_current_access_token():
+    print(authenticator)
 
 # authentication = authenticator.authenticate()
 
