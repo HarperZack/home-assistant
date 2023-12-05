@@ -2,7 +2,6 @@ from yalexs.api import Api
 from yalexs.authenticator import Authenticator
 from homebase import misc
 
-#If not authenticated, check comments at the bottom. It works.
 api = Api(timeout=20)
 authenticator = Authenticator(api, "email", misc.email, misc.august_password)
 authentication = authenticator.authenticate()
@@ -37,15 +36,8 @@ def get_first_lock():
     for lock in locks:
         return Lock(lock, locks[lock], api)
 
-
-def get_current_access_token():
-    print(authenticator)
-
-# authentication = authenticator.authenticate()
-
 # State can be either REQUIRES_VALIDATION, BAD_PASSWORD or AUTHENTICATED
 # You'll need to call different methods to finish authentication process, see below
-# state = authentication.state
 
 # If AuthenticationState is BAD_PASSWORD, that means your login_method, username and password do not match
 
@@ -60,3 +52,16 @@ def get_current_access_token():
 # # If ValidationResult is INVALID_VERIFICATION_CODE, then you'll need to either enter correct one or resend by calling send_verification_code() again
 # # If ValidationResult is VALIDATED, then you'll need to call authenticate() again to finish authentication process
 # authentication = authenticator.authenticate()
+
+
+def reauth_lock():
+    state = authentication.state
+    if 'bad_password' in state.name.lower():
+        print('Password was wrong. Maybe it expired? Check here in the August app on your phone. There is no website.')
+    if 'requires_validation' in state.name.lower():
+        authenticator.send_verification_code()
+        authenticator.validate_verification_code(input('Check your email for a 6 digit code from August; input here.'))
+        authenticator.authenticate()
+        print(f'The new August token is:\n{authentication.access_token}')
+    if 'validated' in state.name.lower():
+        authenticator.authenticate()
