@@ -1,11 +1,11 @@
 from yalexs.api import Api 
 from yalexs.authenticator import Authenticator
-from homebase import misc
+from homebase import restricted
 
 api = Api(timeout=20)
-authenticator = Authenticator(api, "email", misc.email, misc.august_password)
+authenticator = Authenticator(api, "email", restricted.email, restricted.august_password)
 authentication = authenticator.authenticate()
-all_locks = api.get_locks(misc.august_token)
+# all_locks = api.get_locks(restricted.august_token)
 
 
 class Lock:
@@ -13,7 +13,7 @@ class Lock:
         self.name = name
         self.id = id
         self.api = api
-        self.token = misc.august_token
+        self.token = restricted.august_token
 
     def unlock(self):
         self.api.unlock(self.token, self.id)
@@ -65,3 +65,10 @@ def reauth_lock():
         print(f'The new August token is:\n{authentication.access_token}')
     if 'validated' in state.name.lower():
         authenticator.authenticate()
+        print('Authenticated as well')
+    else:
+        print('Authentication error. Either that or they changed their JSON. Check reauth_lock() function.')
+
+
+if __name__ == '__main__':
+    print('test')
