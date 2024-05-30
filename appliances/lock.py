@@ -1,6 +1,6 @@
 from yalexs.api import Api 
 from yalexs.authenticator import Authenticator
-from homebase import restricted
+import restricted
 
 api = Api(timeout=20)
 authenticator = Authenticator(api, "email", restricted.email, restricted.august_password)

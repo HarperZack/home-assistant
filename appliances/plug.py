@@ -4,7 +4,7 @@ import tuyapower
 # properly. Just install individually or uninstall things and it works fine
 
 from pprint import pprint as pp
-import homebase.restricted as restricted
+import restricted as restricted
 
 
 class Plug:
@@ -36,6 +36,15 @@ class Plug:
         pp(tinytuya.OutletDevice(self.id, self.ip, self.key, version=self.version))
 
 
+# To be called in all_appliances.py
+# Monitors, Interface, Extra Plug
+def get_all_plugs():
+    return (Plug(restricted.LP6_ID, restricted.LP6_IP, restricted.LP6_KEY),
+            Plug(restricted.INTERFACE_ID, restricted.INTERFACE_IP, restricted.INTERFACE_KEY),
+            Plug(restricted.EXTRA_ID, restricted.EXTRA_IP, restricted.EXTRA_KEY))
+
+
+# For debugging - shouldn't be necessary to function.
 if __name__ == '__main__':
     extra_plug = Plug(restricted.EXTRA_ID, restricted.EXTRA_IP, restricted.EXTRA_KEY)
     interface = Plug(restricted.INTERFACE_ID, restricted.INTERFACE_IP, restricted.INTERFACE_KEY)
