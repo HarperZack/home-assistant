@@ -3,7 +3,7 @@ import tuyapower
 # The tuyapower pypi entry has some fixes; follow that if it's still weird. Issues with Crypto module not installing
 # properly. Just install individually or uninstall things and it works fine
 
-from pprint import pprint as pp
+import json
 import restricted as restricted
 
 
@@ -25,15 +25,16 @@ class Plug:
         self.version = version
 
     def turn_on_or_off(self):
+        plug_info = tuyapower.deviceJSON(self.id, self.ip, self.key, self.version)
+        plug_json = json.loads(plug_info)
+        is_on = plug_json.get('switch')
+
         socket = tinytuya.OutletDevice(self.id, self.ip, self.key, version=self.version)
-        is_on = tuyapower.deviceJSON(self.id, self.ip, self.key, self.version).split(',')[1]
+
         if 'True' in is_on:
             socket.turn_off()
         elif 'False' in is_on:
             socket.turn_on()
-
-    def print_status(self):
-        pp(tinytuya.OutletDevice(self.id, self.ip, self.key, version=self.version))
 
 
 # To be called in all_appliances.py

@@ -1,18 +1,13 @@
-import sys
-import os
 import plug
+import lock
 
 
-# Returns all plugs, then all locks
 def get_all_appliances():
     monitors, interface, extra = plug.get_all_plugs()
-    all_plugs = (monitors, interface, extra)
+    my_door = lock.get_my_front_door()
 
-    # all_locks = lock.get_first_lock()
-    # return all_plugs, all_locks
-
-    return all_plugs
+    return my_door, monitors, interface, extra
 
 
 if __name__ == '__main__':
-    monitors, interface, extra = plug.get_all_plugs()
+    front_door, monitors, interface, extra = get_all_appliances()
