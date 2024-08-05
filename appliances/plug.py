@@ -42,12 +42,12 @@ class Plug:
 def get_all_plugs():
     return (Plug(restricted.LP6_ID, restricted.LP6_IP, restricted.LP6_KEY),
             Plug(restricted.INTERFACE_ID, restricted.INTERFACE_IP, restricted.INTERFACE_KEY),
-            Plug(restricted.EXTRA_ID, restricted.EXTRA_IP, restricted.EXTRA_KEY))
+            Plug(restricted.WIRELESS_ID, restricted.WIRELESS_IP, restricted.WIRELESS_KEY))
 
 
 # For debugging - shouldn't be necessary to function.
 if __name__ == '__main__':
-    extra_plug = Plug(restricted.EXTRA_ID, restricted.EXTRA_IP, restricted.EXTRA_KEY)
+    extra_plug = Plug(restricted.WIRELESS_ID, restricted.WIRELESS_IP, restricted.WIRELESS_KEY)
     interface = Plug(restricted.INTERFACE_ID, restricted.INTERFACE_IP, restricted.INTERFACE_KEY)
     monitors = Plug(restricted.LP6_ID, restricted.LP6_IP, restricted.LP6_KEY)
 

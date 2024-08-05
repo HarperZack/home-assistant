@@ -39,5 +39,5 @@ active_devices, inactive_devices = get_device_activity()
 
 
 if __name__ == '__main__':
-    test_on = ping(restricted.EXTRA_IP)
+    test_on = ping(restricted.WIRELESS_IP)
     test_off = ping('192.168.1.77')
